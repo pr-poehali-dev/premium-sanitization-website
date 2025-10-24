@@ -184,16 +184,16 @@ export default function Index() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: 'Резиденция на Рублевке', category: 'Частный дом' },
-              { title: 'ЖК "Кутузовская Ривьера"', category: 'Элитное жилье' },
-              { title: 'Пентхаус в Москва-Сити', category: 'Апартаменты' },
-              { title: 'Загородный дом в КП "Довиль"', category: 'Коттедж' },
-              { title: 'Апартаменты в ЖК "Сколково"', category: 'Современное жилье' },
-              { title: 'SPA-зона в частной резиденции', category: 'Wellness' }
+              { title: 'Резиденция на Рублевке', category: 'Частный дом', image: 'https://cdn.poehali.dev/files/5f0b8d43-1ab7-4e19-be6a-9dfdea2ad559.jpg' },
+              { title: 'ЖК "Кутузовская Ривьера"', category: 'Элитное жилье', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' },
+              { title: 'Пентхаус в Москва-Сити', category: 'Апартаменты', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' },
+              { title: 'Загородный дом в КП "Довиль"', category: 'Коттедж', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' },
+              { title: 'Апартаменты в ЖК "Сколково"', category: 'Современное жилье', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' },
+              { title: 'SPA-зона в частной резиденции', category: 'Wellness', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' }
             ].map((project, idx) => (
               <div key={idx} className="group relative h-96 rounded-xl overflow-hidden shadow-lg cursor-pointer">
                 <img 
-                  src="https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg"
+                  src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
