@@ -27,7 +27,7 @@ export default function Index() {
               alt="BRAVAHOLZ" 
               className="h-7 md:h-9"
             />
-            <span className="text-xs md:text-sm font-bold text-primary tracking-widest mt-1">ИНЖИНИРИНГ</span>
+            <span className="text-xs md:text-sm font-bold text-primary tracking-widest mt-1">ENGINEERING</span>
           </div>
           <nav className="hidden md:flex gap-8">
             <a href="#services" className="text-sm hover:text-accent transition-colors">Услуги</a>
@@ -350,7 +350,7 @@ export default function Index() {
                   alt="BRAVAHOLZ" 
                   className="h-10 brightness-0 invert"
                 />
-                <span className="text-sm font-bold text-white tracking-widest mt-2">ИНЖИНИРИНГ</span>
+                <span className="text-sm font-bold text-white tracking-widest mt-2">ENGINEERING</span>
               </div>
               <p className="text-white/70">
                 Эксклюзивные решения в области монтажа премиум-сантехники
