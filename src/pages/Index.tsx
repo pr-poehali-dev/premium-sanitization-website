@@ -184,7 +184,7 @@ export default function Index() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: 'Резиденция на Рублевке', category: 'Частный дом', image: 'https://cdn.poehali.dev/files/5f0b8d43-1ab7-4e19-be6a-9dfdea2ad559.jpg' },
+              { title: 'Дом в г. Истра', category: 'Частный дом', image: 'https://cdn.poehali.dev/files/5f0b8d43-1ab7-4e19-be6a-9dfdea2ad559.jpg' },
               { title: 'ЖК "Кутузовская Ривьера"', category: 'Элитное жилье', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' },
               { title: 'Пентхаус в Москва-Сити', category: 'Апартаменты', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' },
               { title: 'Загородный дом в КП "Довиль"', category: 'Коттедж', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' },
