@@ -21,7 +21,11 @@ export default function Index() {
     <div className="min-h-screen bg-background">
       <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-playfair font-bold text-primary">Premium Plumbing Solutions</h1>
+          <img 
+            src="https://cdn.poehali.dev/files/fc98d253-fb11-4213-82c6-2b1f1052fe75.png" 
+            alt="BRAVAHOLZ" 
+            className="h-8 md:h-10"
+          />
           <nav className="hidden md:flex gap-8">
             <a href="#services" className="text-sm hover:text-accent transition-colors">Услуги</a>
             <a href="#portfolio" className="text-sm hover:text-accent transition-colors">Портфолио</a>
@@ -337,7 +341,11 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="text-2xl font-playfair font-bold mb-4">Premium Plumbing Solutions</h3>
+              <img 
+                src="https://cdn.poehali.dev/files/fc98d253-fb11-4213-82c6-2b1f1052fe75.png" 
+                alt="BRAVAHOLZ" 
+                className="h-10 mb-4 brightness-0 invert"
+              />
               <p className="text-white/70">
                 Эксклюзивные решения в области монтажа премиум-сантехники
               </p>
