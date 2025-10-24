@@ -12,6 +12,9 @@ export default function Index() {
     message: ''
   });
 
+  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
@@ -184,19 +187,32 @@ export default function Index() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: 'Дом в г. Истра', category: 'Частный дом', image: 'https://cdn.poehali.dev/files/5f0b8d43-1ab7-4e19-be6a-9dfdea2ad559.jpg' },
-              { title: 'ЖК "Кутузовская Ривьера"', category: 'Элитное жилье', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' },
-              { title: 'Пентхаус в Москва-Сити', category: 'Апартаменты', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' },
-              { title: 'Загородный дом в КП "Довиль"', category: 'Коттедж', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' },
-              { title: 'Апартаменты в ЖК "Сколково"', category: 'Современное жилье', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' },
-              { title: 'SPA-зона в частной резиденции', category: 'Wellness', image: 'https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg' }
+              { 
+                title: 'Дом в г. Истра', 
+                category: 'Частный дом', 
+                images: [
+                  'https://cdn.poehali.dev/files/5f0b8d43-1ab7-4e19-be6a-9dfdea2ad559.jpg',
+                  'https://cdn.poehali.dev/files/02a82023-c006-42d7-a18b-bd75adf1a43d.jpg'
+                ]
+              },
+              { title: 'ЖК "Кутузовская Ривьера"', category: 'Элитное жилье', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+              { title: 'Пентхаус в Москва-Сити', category: 'Апартаменты', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+              { title: 'Загородный дом в КП "Довиль"', category: 'Коттедж', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+              { title: 'Апартаменты в ЖК "Сколково"', category: 'Современное жилье', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+              { title: 'SPA-зона в частной резиденции', category: 'Wellness', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] }
             ].map((project, idx) => (
-              <div key={idx} className="group relative h-96 rounded-xl overflow-hidden shadow-lg cursor-pointer">
+              <div key={idx} className="group relative h-96 rounded-xl overflow-hidden shadow-lg cursor-pointer" onClick={() => { setSelectedProject(idx); setCurrentImageIndex(0); }}>
                 <img 
-                  src={project.image}
+                  src={project.images[0]}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
+                {project.images.length > 1 && (
+                  <div className="absolute top-4 right-4 bg-primary/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    <Icon name="Images" size={16} className="inline mr-1" />
+                    {project.images.length}
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   <p className="text-sm text-accent font-semibold mb-2">{project.category}</p>
@@ -207,6 +223,123 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {selectedProject !== null && (
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={() => setSelectedProject(null)}>
+          <div className="relative max-w-6xl w-full" onClick={(e) => e.stopPropagation()}>
+            <Button 
+              variant="ghost" 
+              size="icon"
+              className="absolute -top-12 right-0 text-white hover:bg-white/20"
+              onClick={() => setSelectedProject(null)}
+            >
+              <Icon name="X" size={24} />
+            </Button>
+            
+            <div className="relative bg-white rounded-xl overflow-hidden">
+              <img 
+                src={[
+                  { 
+                    title: 'Дом в г. Истра', 
+                    category: 'Частный дом', 
+                    images: [
+                      'https://cdn.poehali.dev/files/5f0b8d43-1ab7-4e19-be6a-9dfdea2ad559.jpg',
+                      'https://cdn.poehali.dev/files/02a82023-c006-42d7-a18b-bd75adf1a43d.jpg'
+                    ]
+                  },
+                  { title: 'ЖК "Кутузовская Ривьера"', category: 'Элитное жилье', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                  { title: 'Пентхаус в Москва-Сити', category: 'Апартаменты', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                  { title: 'Загородный дом в КП "Довиль"', category: 'Коттедж', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                  { title: 'Апартаменты в ЖК "Сколково"', category: 'Современное жилье', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                  { title: 'SPA-зона в частной резиденции', category: 'Wellness', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] }
+                ][selectedProject].images[currentImageIndex]}
+                alt="Project image"
+                className="w-full h-auto max-h-[80vh] object-contain"
+              />
+              
+              {[
+                { 
+                  title: 'Дом в г. Истра', 
+                  category: 'Частный дом', 
+                  images: [
+                    'https://cdn.poehali.dev/files/5f0b8d43-1ab7-4e19-be6a-9dfdea2ad559.jpg',
+                    'https://cdn.poehali.dev/files/02a82023-c006-42d7-a18b-bd75adf1a43d.jpg'
+                  ]
+                },
+                { title: 'ЖК "Кутузовская Ривьера"', category: 'Элитное жилье', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                { title: 'Пентхаус в Москва-Сити', category: 'Апартаменты', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                { title: 'Загородный дом в КП "Довиль"', category: 'Коттедж', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                { title: 'Апартаменты в ЖК "Сколково"', category: 'Современное жилье', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                { title: 'SPA-зона в частной резиденции', category: 'Wellness', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] }
+              ][selectedProject].images.length > 1 && (
+                <>
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white"
+                    onClick={() => setCurrentImageIndex(prev => prev > 0 ? prev - 1 : [
+                      { 
+                        title: 'Дом в г. Истра', 
+                        category: 'Частный дом', 
+                        images: [
+                          'https://cdn.poehali.dev/files/5f0b8d43-1ab7-4e19-be6a-9dfdea2ad559.jpg',
+                          'https://cdn.poehali.dev/files/02a82023-c006-42d7-a18b-bd75adf1a43d.jpg'
+                        ]
+                      },
+                      { title: 'ЖК "Кутузовская Ривьера"', category: 'Элитное жилье', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                      { title: 'Пентхаус в Москва-Сити', category: 'Апартаменты', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                      { title: 'Загородный дом в КП "Довиль"', category: 'Коттедж', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                      { title: 'Апартаменты в ЖК "Сколково"', category: 'Современное жилье', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                      { title: 'SPA-зона в частной резиденции', category: 'Wellness', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] }
+                    ][selectedProject].images.length - 1)}
+                  >
+                    <Icon name="ChevronLeft" size={24} />
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white"
+                    onClick={() => setCurrentImageIndex(prev => prev < [
+                      { 
+                        title: 'Дом в г. Истра', 
+                        category: 'Частный дом', 
+                        images: [
+                          'https://cdn.poehali.dev/files/5f0b8d43-1ab7-4e19-be6a-9dfdea2ad559.jpg',
+                          'https://cdn.poehali.dev/files/02a82023-c006-42d7-a18b-bd75adf1a43d.jpg'
+                        ]
+                      },
+                      { title: 'ЖК "Кутузовская Ривьера"', category: 'Элитное жилье', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                      { title: 'Пентхаус в Москва-Сити', category: 'Апартаменты', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                      { title: 'Загородный дом в КП "Довиль"', category: 'Коттедж', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                      { title: 'Апартаменты в ЖК "Сколково"', category: 'Современное жилье', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                      { title: 'SPA-зона в частной резиденции', category: 'Wellness', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] }
+                    ][selectedProject].images.length - 1 ? prev + 1 : 0)}
+                  >
+                    <Icon name="ChevronRight" size={24} />
+                  </Button>
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/90 px-4 py-2 rounded-full text-sm font-semibold">
+                    {currentImageIndex + 1} / {[
+                      { 
+                        title: 'Дом в г. Истра', 
+                        category: 'Частный дом', 
+                        images: [
+                          'https://cdn.poehali.dev/files/5f0b8d43-1ab7-4e19-be6a-9dfdea2ad559.jpg',
+                          'https://cdn.poehali.dev/files/02a82023-c006-42d7-a18b-bd75adf1a43d.jpg'
+                        ]
+                      },
+                      { title: 'ЖК "Кутузовская Ривьера"', category: 'Элитное жилье', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                      { title: 'Пентхаус в Москва-Сити', category: 'Апартаменты', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                      { title: 'Загородный дом в КП "Довиль"', category: 'Коттедж', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                      { title: 'Апартаменты в ЖК "Сколково"', category: 'Современное жилье', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] },
+                      { title: 'SPA-зона в частной резиденции', category: 'Wellness', images: ['https://cdn.poehali.dev/projects/76e57fc3-0e31-48d9-9c2a-e3c19fea58ba/files/107a7fd5-4abf-421c-9755-77e32a3bf6e9.jpg'] }
+                    ][selectedProject].images.length}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       <section id="about" className="py-20 bg-white">
         <div className="container mx-auto px-4">
