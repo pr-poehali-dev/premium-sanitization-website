@@ -275,7 +275,7 @@ export default function Index() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Телефон</h3>
-                    <p className="text-muted-foreground">+7 (495) 123-45-67</p>
+                    <p className="text-muted-foreground">+7-985-226-28-40</p>
                   </div>
                 </div>
 
@@ -368,7 +368,7 @@ export default function Index() {
             <div>
               <h4 className="font-semibold mb-4">Контакты</h4>
               <ul className="space-y-2 text-white/70">
-                <li>+7 (495) 123-45-67</li>
+                <li>+7-985-226-28-40</li>
                 <li>info@premium-plumbing.ru</li>
                 <li>Москва, ул. Примерная, 123</li>
               </ul>
