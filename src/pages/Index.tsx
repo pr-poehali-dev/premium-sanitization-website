@@ -21,11 +21,14 @@ export default function Index() {
     <div className="min-h-screen bg-background">
       <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-border">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <img 
-            src="https://cdn.poehali.dev/files/fc98d253-fb11-4213-82c6-2b1f1052fe75.png" 
-            alt="BRAVAHOLZ" 
-            className="h-8 md:h-10"
-          />
+          <div className="flex items-center gap-3">
+            <img 
+              src="https://cdn.poehali.dev/files/fc98d253-fb11-4213-82c6-2b1f1052fe75.png" 
+              alt="BRAVAHOLZ" 
+              className="h-8 md:h-10"
+            />
+            <span className="text-lg md:text-xl font-bold text-primary tracking-wider">ИНЖИНИРИНГ</span>
+          </div>
           <nav className="hidden md:flex gap-8">
             <a href="#services" className="text-sm hover:text-accent transition-colors">Услуги</a>
             <a href="#portfolio" className="text-sm hover:text-accent transition-colors">Портфолио</a>
@@ -341,11 +344,14 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <img 
-                src="https://cdn.poehali.dev/files/fc98d253-fb11-4213-82c6-2b1f1052fe75.png" 
-                alt="BRAVAHOLZ" 
-                className="h-10 mb-4 brightness-0 invert"
-              />
+              <div className="flex items-center gap-3 mb-4">
+                <img 
+                  src="https://cdn.poehali.dev/files/fc98d253-fb11-4213-82c6-2b1f1052fe75.png" 
+                  alt="BRAVAHOLZ" 
+                  className="h-10 brightness-0 invert"
+                />
+                <span className="text-xl font-bold text-white tracking-wider">ИНЖИНИРИНГ</span>
+              </div>
               <p className="text-white/70">
                 Эксклюзивные решения в области монтажа премиум-сантехники
               </p>
